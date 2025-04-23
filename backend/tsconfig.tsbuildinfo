@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controllers/auth.controller.ts","./src/controllers/loan.controller.ts","./src/controllers/transaction.controller.ts","./src/lib/pg.db.ts","./src/lib/utils.ts","./src/middleware/auth.middle.ts","./src/routes/auth.route.ts","./src/routes/loan.route.ts","./src/routes/transaction.route.ts"],"version":"5.8.2"}
