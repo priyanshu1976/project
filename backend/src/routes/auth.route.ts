@@ -15,7 +15,7 @@ router.post('/signup', signup)
 // @ts-ignore
 router.post('/signupEMP', signupEmploy)
 // @ts-ignore
-router.post('/loginEMP', signupEmploy)
+router.post('/loginEMP', loginEmploy)
 // @ts-ignore
 router.post('/login', login)
 // @ts-ignore
