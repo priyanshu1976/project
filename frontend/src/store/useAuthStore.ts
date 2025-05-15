@@ -4,15 +4,16 @@ import { axiosInstance } from '../lib/axios'
 import { toast } from 'react-hot-toast'
 import axios from 'axios'
 
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create((set , get) => ({
   User: null,
   isCheckingAuth: true,
   isSigningUp: false,
   isLogingIn: false,
+  Transaction : null,
 
   checkAuth: async () => {
     try {
-      const res = await axiosInstance.get('/auth/check')
+      const res = await axiosInstance.post('/auth/check')
       set({ User: res.data })
     } catch (error) {
       set({ User: null })
@@ -38,7 +39,7 @@ export const useAuthStore = create((set) => ({
     set({ isLogingIn: true })
     try {
       console.log('Attempting login with:', data)
-      const res = await axios.post('http://localhost:5000/api/auth/login', data)
+      const res = await axiosInstance.post('http://localhost:5000/api/auth/login', data)
       set({ User: res.data })
       console.log('Login successful:', res.data)
     } catch (error: any) {
@@ -52,4 +53,18 @@ export const useAuthStore = create((set) => ({
       set({ isLogingIn: false })
     }
   },
+
+  getTransaction: async () => {
+    const { User } = get();
+    try {
+      const res = await axiosInstance.post('/transactions/getTransactions' , {email : User.email})
+      set({ Transaction: res.data })
+      console.log(res.data)
+
+    } catch (error) {
+      set({ User: null })
+      console.log('error in transation auth')
+    }
+  }
+
 }))

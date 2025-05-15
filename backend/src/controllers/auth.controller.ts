@@ -139,13 +139,15 @@ export const check = (req: Request, res: Response) => {
 }
 
 export const signupEmploy = async (req: Request, res: Response) => {
-  const { name, email, password, phone, branchid } = req.body
+  const { name, email, password, phone, branch_id } = req.body
 
   try {
     // Check for missing fields
-    if (!name || !email || !password || !phone) {
+    if (!name || !email || !password || !phone || !branch_id) {
       return res.status(400).json({ message: 'All fields are required' })
     }
+
+    console.log(branch_id)
 
     // Check if email or phone already exists
     const existingEmploy = await pgclient.query(
@@ -164,7 +166,7 @@ export const signupEmploy = async (req: Request, res: Response) => {
     // Insert new employees into the database
     await pgclient.query(
       `INSERT INTO employees (name, email, password, phone, branch_id) VALUES ($1, $2, $3, $4 , $5)`,
-      [name, email, hashedPassword, phone, branchid]
+      [name, email, hashedPassword, phone, branch_id]
     )
 
     // Generate token for session (optional)

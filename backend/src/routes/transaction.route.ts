@@ -26,7 +26,7 @@ router.post('/withdrawMoney', protectedRoute, withdrawMoney)
 router.post('/getTransactions', protectedRoute, getTransactions)
 
 // @ts-ignore
-router.post('/getTransactionsEMP', protectedRoute, getTransactionsEmploy)
+router.post('/getTransactionsEMP', getTransactionsEmploy)
 
 // @ts-ignore
 router.post('/getTransactionsADM', getTransactionsAdmin)

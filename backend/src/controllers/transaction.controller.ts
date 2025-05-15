@@ -302,7 +302,7 @@ export const getTransactionsEmploy = async (req: Request, res: Response) => {
 
     // Get employ's branch_id using email
     const employQuery = await pgclient.query(
-      'SELECT branch_id FROM employ WHERE email = $1',
+      'SELECT branch_id FROM employees WHERE email = $1',
       [email]
     )
 

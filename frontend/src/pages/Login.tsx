@@ -1,4 +1,4 @@
-import React, { useState, type FormEvent } from 'react'
+import React, { useEffect, useState, type FormEvent } from 'react'
 import { Eye, EyeClosed } from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +13,12 @@ function Login() {
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (User) {
+      navigate('/landing')
+    }
+  })
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -23,8 +29,11 @@ function Login() {
 
   const formsubmit = async (e: FormEvent) => {
     e.preventDefault()
-    formlogin(formData)
-    if (User) return navigate('/landing')
+    await formlogin(formData)
+    if (User) {
+      console.log('navitatingtot / landing ')
+      navigate('/landing')
+    }
   }
 
   return (
